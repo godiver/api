@@ -17,6 +17,7 @@ func Router() {
 
 	// Routes
 	e.GET("/", controller.Hello)
+	e.GET("/api/v1/books/:book_id/videos", video.Index())
 
 	// Start server
 	e.Logger.Fatal(e.Start(":8080"))
