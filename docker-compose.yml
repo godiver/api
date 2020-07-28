@@ -1,0 +1,11 @@
+version: '3.7'
+services:
+  web:
+    build:
+      context: .
+      target: build
+    ports:
+      - "8090:8080"
+    volumes:
+      - .:/go/src/github.com/godiver/api
+    command: ["fresh"]
