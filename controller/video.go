@@ -6,5 +6,9 @@ import (
 )
 
 func GetVideos(c echo.Context) error {
-	return c.String(http.StatusOK, "Videos!")
+	jsonMap := map[string]string{
+		"foo": "bar",
+		"hoge": "fuga",
+	}
+	return c.JSON(http.StatusOK, jsonMap)
 }
