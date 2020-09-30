@@ -23,11 +23,11 @@ func Books(c echo.Context) error {
 	defer res.Body.Close()
 	var r io.Reader = res.Body
 	r = io.TeeReader(r, os.Stderr)
-	var foo interface{}
-	err = json.NewDecoder(r).Decode(&foo)
+	var books interface{}
+	err = json.NewDecoder(r).Decode(&books)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	return c.JSON(http.StatusOK, res)
+	return c.JSON(http.StatusOK, books)
 }
