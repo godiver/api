@@ -5,7 +5,7 @@ services:
       context: .
       target: build
       args:
-        - RAKUTEN_APP_ID="1011959466247363309"
+        - RAKUTEN_APP_ID="XXXXXXXXXXXXX"
     ports:
       - "8090:8080"
     volumes:
