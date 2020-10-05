@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/spf13/viper"
+	"os"
 )
 
 // Config has all environment variables
@@ -23,4 +24,5 @@ func ReadEnv() {
 	}
 
 	viper.Unmarshal(&Env)
+	Env.API.Rakuten.ID = os.Getenv("RAKUTEN_APP_ID")
 }
