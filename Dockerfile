@@ -1,7 +1,9 @@
 FROM golang:1.14.6-alpine3.12 as build
 
-ENV APP="/go/src/github.com/godiver/api"
 ARG RAKUTEN_APP_ID=""
+
+ENV APP="/go/src/github.com/godiver/api" RAKUTEN_APP_ID=$RAKUTEN_APP_ID
+
 WORKDIR ${APP}
 RUN apk update && \
     apk upgrade && \
