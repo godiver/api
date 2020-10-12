@@ -31,3 +31,7 @@ func Books(c echo.Context) error {
 
 	return c.JSON(http.StatusOK, books)
 }
+
+type Parameter struct {
+	Title string `json:"title" form:"title" query:"title"`
+}
