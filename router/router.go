@@ -17,6 +17,8 @@ func Router() {
 
 	// Routes
 	e.GET("/", controller.Hello)
+	e.GET("/api/v1/books", controller.Books)
+	e.GET("/api/v1/books/search", controller.SearchBooks)
 	e.GET("/api/v1/books/:book_id/videos", controller.GetVideos)
 
 	// Start server

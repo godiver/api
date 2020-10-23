@@ -1,9 +1,11 @@
-version: '3.7'
+version: '3.8'
 services:
   api:
     build:
       context: .
       target: build
+      args:
+        - RAKUTEN_APP_ID="XXXXXXXXXXXXX"
     ports:
       - "8090:8080"
     volumes:
