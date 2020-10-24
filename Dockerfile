@@ -7,6 +7,7 @@ ENV GO111MODULE="on" \
     RAKUTEN_APP_ID=$RAKUTEN_APP_ID
 
 WORKDIR ${APP}
+
 RUN apk update && \
     apk upgrade && \
     apk add --no-cache \
