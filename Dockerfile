@@ -17,3 +17,11 @@ RUN apk update && \
 COPY ./ .
 
 RUN go build -o app ${APP}/main.go
+
+# 本番用のDocker imageを作成する
+FROM alpine:3.12.1
+RUN apk --no-cache add ca-certificates
+WORKDIR /root/
+COPY --from=build /go/src/github.com/godiver/api/app .
+EXPOSE 8080
+CMD ["./app"]
