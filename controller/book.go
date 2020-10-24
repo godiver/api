@@ -8,7 +8,7 @@ import (
 	"net/http"
 	"os"
 
-	"src/github.com/godiver/api/config/env"
+	"app/config/env"
 
 	"github.com/labstack/echo/v4"
 )
