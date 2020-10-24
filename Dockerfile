@@ -15,3 +15,5 @@ RUN apk update && \
     go get github.com/pilu/fresh
 
 COPY ./ .
+
+RUN go build -o app ${APP}/main.go
