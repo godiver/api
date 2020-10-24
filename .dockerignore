@@ -1,0 +1,5 @@
+.git/*
+test/*
+vendor/*
+.devcontainer/*
+tmp/*

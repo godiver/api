@@ -1,4 +1,4 @@
-module src/github.com/godiver/api
+module app
 
 go 1.14
 
