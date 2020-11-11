@@ -1,8 +1,8 @@
 package main
 
 import (
-	"src/github.com/godiver/api/config/env"
-	"src/github.com/godiver/api/router"
+	"app/config/env"
+	"app/router"
 )
 
 func main() {

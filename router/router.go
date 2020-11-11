@@ -4,7 +4,7 @@ import (
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 
-	"src/github.com/godiver/api/controller"
+	"app/controller"
 )
 
 func Router() {
