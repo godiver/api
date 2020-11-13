@@ -30,12 +30,14 @@ func GetVideos(c echo.Context) error {
 		log.Fatalf("Error creating new YouTube client: %v", err)
 	}
 
+	arr := []string{"id", "snippet"}
+
 	// Make the API call to YouTube.
-	call := service.Search.List("id,snippet").
+	call := service.Search.List(arr).
 		Q(*query).
 		MaxResults(*maxResults)
 	response, err := call.Do()
-	handleError(err, "")
+	// handleError(err, "")
 
 	// Group video, channel, and playlist results in separate lists.
 	videos := make(map[string]string)
@@ -57,6 +59,8 @@ func GetVideos(c echo.Context) error {
 	printIDs("Videos", videos)
 	printIDs("Channels", channels)
 	printIDs("Playlists", playlists)
+
+	return c.String(http.StatusOK, "good")
 }
 
 // Print the ID and title of each result in a list as well as a name that
