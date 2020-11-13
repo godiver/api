@@ -19,7 +19,7 @@ func Router() {
 	e.GET("/", controller.Hello)
 	e.GET("/api/v1/books", controller.Books)
 	e.GET("/api/v1/books/search", controller.SearchBooks)
-	e.GET("/api/v1/books/:book_id/videos", controller.GetVideos)
+	e.GET("/api/v1/books/videos", controller.GetVideos)
 
 	// Start server
 	e.Logger.Fatal(e.Start(":8080"))
