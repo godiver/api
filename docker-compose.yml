@@ -6,6 +6,7 @@ services:
       target: build
       args:
         - RAKUTEN_APP_ID="XXXXXXXXXXXXX"
+        - YOUTUBE_DEVELOPER_KEY=XXXXXXXXXXXXX
     ports:
       - "8090:8080"
     volumes:

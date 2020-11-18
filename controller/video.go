@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"app/config/env"
 	"flag"
 	"fmt"
 	"log"
@@ -16,9 +17,9 @@ var (
 	maxResults = flag.Int64("max-results", 25, "Max YouTube results")
 )
 
-const developerKey = "AIzaSyDHGSvQ4fMur-Gt1lcBz67WIitlakq28PE"
-
 func GetVideos(c echo.Context) error {
+	developerKey := env.Env.API.Youtube.Key
+
 	flag.Parse()
 
 	client := &http.Client{
