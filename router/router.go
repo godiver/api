@@ -1,6 +1,9 @@
 package router
 
 import (
+	"fmt"
+	"os"
+
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 
@@ -21,6 +24,12 @@ func Router() {
 	e.GET("/api/v1/books/search", controller.SearchBooks)
 	e.GET("/api/v1/books/videos", controller.GetVideos)
 
+	// 環境変数からPORTを取得する
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
+
 	// Start server
-	e.Logger.Fatal(e.Start(":8080"))
+	e.Logger.Fatal(e.Start(fmt.Sprintf(":%s", port)))
 }
