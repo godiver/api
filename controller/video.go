@@ -2,6 +2,7 @@ package controller
 
 import (
 	"app/config/env"
+	"encoding/json"
 	"flag"
 	"fmt"
 	"log"
@@ -13,7 +14,7 @@ import (
 )
 
 var (
-	query      = flag.String("query", "Google", "Search term")
+	query      = flag.String("query", "イシューからはじめよ", "Search term")
 	maxResults = flag.Int64("max-results", 25, "Max YouTube results")
 )
 
@@ -61,7 +62,9 @@ func GetVideos(c echo.Context) error {
 	printIDs("Channels", channels)
 	printIDs("Playlists", playlists)
 
-	return c.String(http.StatusOK, "good")
+	json, _ := json.Marshal(response)
+
+	return c.String(http.StatusOK, string(json))
 }
 
 // Print the ID and title of each result in a list as well as a name that
