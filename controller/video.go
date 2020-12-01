@@ -2,7 +2,6 @@ package controller
 
 import (
 	"app/config/env"
-	"encoding/json"
 	"flag"
 	"fmt"
 	"log"
@@ -62,9 +61,7 @@ func GetVideos(c echo.Context) error {
 	printIDs("Channels", channels)
 	printIDs("Playlists", playlists)
 
-	json, _ := json.Marshal(response)
-
-	return c.String(http.StatusOK, string(json))
+	return c.JSON(http.StatusOK, response)
 }
 
 // Print the ID and title of each result in a list as well as a name that
