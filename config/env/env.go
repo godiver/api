@@ -13,4 +13,5 @@ var Env = env{}
 
 func ReadEnv() {
 	Env.API.Rakuten.ID = os.Getenv("RAKUTEN_APP_ID")
+	Env.API.Youtube.Key = os.Getenv("YOUTUBE_DEVELOPER_KEY")
 }
