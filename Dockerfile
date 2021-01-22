@@ -1,4 +1,4 @@
-FROM golang:1.14.6-alpine3.12 as build
+FROM golang:1.15.7-alpine3.13 as build
 
 ARG RAKUTEN_APP_ID=""
 ARG YOUTUBE_DEVELOPER_KEY=""
