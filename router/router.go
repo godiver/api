@@ -22,7 +22,7 @@ func Router() {
 	e.GET("/", controller.Hello)
 	e.GET("/api/v1/books", controller.Books)
 	e.GET("/api/v1/books/search", controller.SearchBooks)
-	e.GET("/api/v1/books/videos", controller.GetVideos)
+	e.GET("/api/v1/books/videos/:title", controller.GetVideos)
 
 	// 環境変数からPORTを取得する
 	port := os.Getenv("PORT")

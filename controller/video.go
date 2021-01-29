@@ -13,11 +13,13 @@ import (
 )
 
 var (
-	query      = flag.String("query", "Google", "Search term")
 	maxResults = flag.Int64("max-results", 25, "Max YouTube results")
 )
 
 func GetVideos(c echo.Context) error {
+	title := c.Param("title")
+	query := flag.String("query", title, "Search term")
+
 	developerKey := env.Env.API.Youtube.Key
 
 	flag.Parse()
@@ -61,7 +63,7 @@ func GetVideos(c echo.Context) error {
 	printIDs("Channels", channels)
 	printIDs("Playlists", playlists)
 
-	return c.String(http.StatusOK, "good")
+	return c.JSON(http.StatusOK, response)
 }
 
 // Print the ID and title of each result in a list as well as a name that
