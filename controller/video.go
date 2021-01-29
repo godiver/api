@@ -13,11 +13,13 @@ import (
 )
 
 var (
-	query      = flag.String("query", "イシューからはじめよ", "Search term")
 	maxResults = flag.Int64("max-results", 25, "Max YouTube results")
 )
 
 func GetVideos(c echo.Context) error {
+	title := c.Param("title")
+	query := flag.String("query", title, "Search term")
+
 	developerKey := env.Env.API.Youtube.Key
 
 	flag.Parse()
