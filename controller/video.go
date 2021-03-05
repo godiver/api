@@ -12,14 +12,8 @@ import (
 	"google.golang.org/api/youtube/v3"
 )
 
-var (
-	maxResults = flag.Int64("max-results", 25, "Max YouTube results")
-)
-
 func GetVideos(c echo.Context) error {
 	title := c.Param("title")
-	query := flag.String("query", title, "Search term")
-
 	developerKey := env.Env.API.Youtube.Key
 
 	flag.Parse()
@@ -37,8 +31,8 @@ func GetVideos(c echo.Context) error {
 
 	// Make the API call to YouTube.
 	call := service.Search.List(arr).
-		Q(*query).
-		MaxResults(*maxResults)
+		Q(title).
+		MaxResults(25)
 	response, err := call.Do()
 	// handleError(err, "")
 
