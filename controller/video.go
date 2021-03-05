@@ -2,7 +2,6 @@ package controller
 
 import (
 	"app/config/env"
-	"flag"
 	"fmt"
 	"log"
 	"net/http"
@@ -15,8 +14,6 @@ import (
 func GetVideos(c echo.Context) error {
 	title := c.Param("title")
 	developerKey := env.Env.API.Youtube.Key
-
-	flag.Parse()
 
 	client := &http.Client{
 		Transport: &transport.APIKey{Key: developerKey},
