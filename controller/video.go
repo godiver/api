@@ -35,24 +35,54 @@ func GetVideos(c echo.Context) error {
 
 	// Group video, channel, and playlist results in separate lists.
 	videos := make(map[string]string)
-	channels := make(map[string]string)
-	playlists := make(map[string]string)
 
 	// Iterate through each item and add it to the correct list.
 	for _, item := range response.Items {
 		switch item.Id.Kind {
 		case "youtube#video":
 			videos[item.Id.VideoId] = item.Snippet.Title
-		case "youtube#channel":
-			channels[item.Id.ChannelId] = item.Snippet.Title
-		case "youtube#playlist":
-			playlists[item.Id.PlaylistId] = item.Snippet.Title
 		}
 	}
 
 	printIDs("Videos", videos)
-	printIDs("Channels", channels)
-	printIDs("Playlists", playlists)
+
+	return c.JSON(http.StatusOK, response)
+}
+
+func GetVideo(c echo.Context) error {
+	videoId := c.Param("videoId")
+	developerKey := env.Env.API.Youtube.Key
+
+	client := &http.Client{
+		Transport: &transport.APIKey{Key: developerKey},
+	}
+
+	service, err := youtube.New(client)
+	if err != nil {
+		log.Fatalf("Error creating new YouTube client: %v", err)
+	}
+
+	arr := []string{"id", "snippet"}
+
+	// Make the API call to YouTube.
+	call := service.Search.List(arr).
+		Q(videoId).
+		MaxResults(1)
+	response, err := call.Do()
+	// handleError(err, "")
+
+	// Group video, channel, and playlist results in separate lists.
+	videos := make(map[string]string)
+
+	// Iterate through each item and add it to the correct list.
+	for _, item := range response.Items {
+		switch item.Id.Kind {
+		case "youtube#video":
+			videos[item.Id.VideoId] = item.Snippet.Title
+		}
+	}
+
+	printIDs("Videos", videos)
 
 	return c.JSON(http.StatusOK, response)
 }
