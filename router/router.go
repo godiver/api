@@ -17,6 +17,7 @@ func Router() {
 	// Middleware
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
+	e.Use(middleware.CORS())
 
 	// Routes
 	e.GET("/", controller.Hello)
