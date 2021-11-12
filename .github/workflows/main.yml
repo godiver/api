@@ -26,6 +26,7 @@ jobs:
           GCP_SERVICE_ACCOUNT: ${{ secrets.GCP_SERVICE_ACCOUNT }}
           GCP_WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
         with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
           token_format: access_token
           workload_identity_provider: "$GCP_WORKLOAD_IDENTITY_PROVIDER"
           service_account: "$GCP_SERVICE_ACCOUNT"
