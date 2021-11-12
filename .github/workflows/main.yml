@@ -23,12 +23,12 @@ jobs:
         name: authentication
         uses: google-github-actions/auth@v0.3.1
         env:
-          GCP_SERVICE_ACCOUNT: ${{secrets.GCP_SERVICE_ACCOUNT}}
-          GCP_WORKLOAD_IDENTITY_PROVIDER: ${{secrets.GCP_WORKLOAD_IDENTITY_PROVIDER}}
+          GCP_SERVICE_ACCOUNT: ${{ secrets.GCP_SERVICE_ACCOUNT }}
+          GCP_WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
         with:
           token_format: access_token
-          workload_identity_provider: ${{GCP_SERVICE_ACCOUNT}}
-          service_account: ${{GCP_WORKLOAD_IDENTITY_PROVIDER}}
+          workload_identity_provider: $GCP_SERVICE_ACCOUNT
+          service_account: $GCP_WORKLOAD_IDENTITY_PROVIDER
 
       - name: access
         run: echo "${{steps.auth.outputs}}"
