@@ -26,11 +26,13 @@ jobs:
           GCP_SERVICE_ACCOUNT: ${{ secrets.GCP_SERVICE_ACCOUNT }}
           GCP_WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
           GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+          GCP_PROVIDER_AUDIENCE_URL: ${{ secrets.GCP_PROVIDER_AUDIENCE_URL }}
         with:
           token_format: access_token
           project_id: "$PROJECT_ID"
           workload_identity_provider: "$GCP_WORKLOAD_IDENTITY_PROVIDER"
           service_account: "$GCP_SERVICE_ACCOUNT"
+          audience: "$GCP_PROVIDER_AUDIENCE_URL"
 
       - name: access
         run: echo "${{steps.auth.outputs}}"
