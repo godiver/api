@@ -18,15 +18,16 @@ jobs:
     runs-on: ubuntu-latest
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - uses: actions/checkout@v2
-      - name: authentication
-        uses: google-github-actions/auth@v0.4.0
-        with:
-          workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
-          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
+    - uses: actions/checkout@v2
+    - id: 'auth'
+      name: 'authentication'
+      uses: 'google-github-actions/auth@v0.4.0'
+      with:
+        workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+        service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
 
-      - name: access
-        run: echo "${{steps.auth.outputs}}"
+      # - name: access
+      #   run: echo "${{steps.auth.outputs}}"
 
       # - name: Set up Go
       #   uses: actions/setup-go@v2
