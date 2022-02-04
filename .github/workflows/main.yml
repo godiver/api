@@ -18,16 +18,26 @@ jobs:
     runs-on: ubuntu-latest
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    - uses: actions/checkout@v2
-    - id: 'auth'
-      name: 'authentication'
-      uses: 'google-github-actions/auth@v0.4.0'
-      with:
-        workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
-        service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
+      - uses: actions/checkout@v2
+      - id: auth
+        name: authentication
+        uses: google-github-actions/auth@v0.4.0
+        # env:
+        #   GCP_SERVICE_ACCOUNT: ${{ secrets.GCP_SERVICE_ACCOUNT }}
+        #   GCP_WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+        #   GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+        #   GCP_PROVIDER_AUDIENCE: ${{ secrets.GCP_PROVIDER_AUDIENCE }}
+        with:
+          workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
+          # token_format: access_token
+          # project_id: "$PROJECT_ID"
+          # workload_identity_provider: "$GCP_WORKLOAD_IDENTITY_PROVIDER"
+          # service_account: "$GCP_SERVICE_ACCOUNT"
+          # audience: "$GCP_PROVIDER_AUDIENCE"
 
-      # - name: access
-      #   run: echo "${{steps.auth.outputs}}"
+      - name: access
+        run: echo "${{steps.auth.outputs}}"
 
       # - name: Set up Go
       #   uses: actions/setup-go@v2
