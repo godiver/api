@@ -22,7 +22,7 @@ jobs:
       - name: access
         env:
           HOGE_HOGE: ${{ secrets.HOGE }}
-        run: echo "$HOGE_HOGE"
+        run: echo $HOGE_HOGE
       - id: auth
         name: authentication
         uses: google-github-actions/auth@v0.4.0
