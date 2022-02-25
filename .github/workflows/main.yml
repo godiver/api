@@ -25,11 +25,11 @@ jobs:
         with:
           workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
           service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
+      - id: build
+        name: Build docker image
+        run: |-
+          docker build -t book_api:latest
+      - name: Login GCP
+        run: |-
+          gcloud auth login --brief --cred-file="${{ steps.auth.outputs.credentials_file_path }}"
 
-      - name: Set up Go
-        uses: actions/setup-go@v2
-        with:
-          go-version: 1.15.7
-
-      - name: Build
-        run: go build -v ./...
