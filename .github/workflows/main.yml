@@ -26,6 +26,9 @@ jobs:
           workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
           service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
 
+      - name: check auth output
+        run: echo '${{ steps.auth.outputs }}'
+
       # - name: Set up Go
       #   uses: actions/setup-go@v2
       #   with:
