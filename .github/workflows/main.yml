@@ -28,7 +28,7 @@ jobs:
       - id: build
         name: Build docker image
         run: |-
-          docker build -t book_api:latest
+          docker build . -t book_api:latest
       - name: Login GCP
         run: |-
           gcloud auth login --brief --cred-file="${{ steps.auth.outputs.credentials_file_path }}"
