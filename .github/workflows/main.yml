@@ -32,4 +32,7 @@ jobs:
       - name: Login GCP
         run: |-
           gcloud auth login --brief --cred-file="${{ steps.auth.outputs.credentials_file_path }}"
+      - name: Push docker image
+        run: |-
+          docker push ${{ secrets.GCR_PRD }}:latest
 
