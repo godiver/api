@@ -25,13 +25,13 @@ jobs:
         with:
           workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
           service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
+      - name: Login GCP
+        run: |-
+          gcloud auth login --brief --cred-file="${{ steps.auth.outputs.credentials_file_path }}"
       - id: build
         name: Build docker image
         run: |-
           docker build . -t ${{ secrets.GCR_PRD }}:latest
-      - name: Login GCP
-        run: |-
-          gcloud auth login --brief --cred-file="${{ steps.auth.outputs.credentials_file_path }}"
       - name: Push docker image
         run: |-
           docker push ${{ secrets.GCR_PRD }}:latest
