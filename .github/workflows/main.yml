@@ -29,13 +29,13 @@ jobs:
       - name: Login GCP
         run: |-
           gcloud auth login --cred-file="${{ steps.auth.outputs.credentials_file_path }}"
-          gcloud auth list
       - id: build
         name: Build docker image
         run: |-
           docker build . -t ${{ secrets.GCR_PRD }}:latest
       - name: Push docker image
         run: |-
+          gcloud auth list
           docker push ${{ secrets.GCR_PRD }}:latest
       - name: Logout
         run: |-
