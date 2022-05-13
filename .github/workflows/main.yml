@@ -25,11 +25,11 @@ jobs:
         with:
           workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
           service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
-          access_token_lifetime: 3600s
+          access_token_lifetime: 30s
       - name: Login GCP
         run: |-
-          echo "${{ steps.auth.outputs }}"
           gcloud auth login --cred-file="${{ steps.auth.outputs.credentials_file_path }}"
+          gcloud auth list
       - id: build
         name: Build docker image
         run: |-
