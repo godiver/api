@@ -28,7 +28,8 @@ jobs:
           access_token_lifetime: 3600s
       - name: Login GCP
         run: |-
-          printf "Y" | gcloud auth login --brief --cred-file="${{ steps.auth.outputs.credentials_file_path }}"
+          gcloud auth list
+          gcloud auth login --cred-file="${{ steps.auth.outputs.credentials_file_path }}"
       - id: build
         name: Build docker image
         run: |-
