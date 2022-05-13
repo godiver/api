@@ -28,7 +28,6 @@ jobs:
           access_token_lifetime: 3600s
       - name: Login GCP
         run: |-
-          gcloud auth revoke --all
           printf "Y" | gcloud auth login --brief --cred-file="${{ steps.auth.outputs.credentials_file_path }}"
       - id: build
         name: Build docker image
@@ -37,4 +36,7 @@ jobs:
       - name: Push docker image
         run: |-
           docker push ${{ secrets.GCR_PRD }}:latest
+      - name: Logout
+        run: |-
+          gcloud auth revoke --all
 
