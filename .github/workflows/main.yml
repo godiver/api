@@ -35,6 +35,7 @@ jobs:
           docker build . -t ${{ secrets.GCR_PRD }}:latest
       - name: Push docker image
         run: |-
+          gcloud auth activate-service-account ${{ secrets.GCP_SERVICE_ACCOUNT }}
           gcloud auth list
           docker push ${{ secrets.GCR_PRD }}:latest
       - name: Logout
