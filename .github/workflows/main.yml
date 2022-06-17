@@ -29,6 +29,7 @@ jobs:
       - name: Login GCP
         run: |-
           gcloud auth login --cred-file="${{ steps.auth.outputs.credentials_file_path }}"
+          gcloud config set project godiver-books-video
       - id: build
         name: Build docker image
         run: |-
