@@ -25,7 +25,7 @@ jobs:
         with:
           workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
           service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
-          access_token_lifetime: 30s
+          access_token_lifetime: 300s
       - name: Login GCP
         run: |-
           gcloud auth login --cred-file="${{ steps.auth.outputs.credentials_file_path }}"
@@ -40,4 +40,3 @@ jobs:
       - name: Logout
         run: |-
           gcloud auth revoke --all
-
