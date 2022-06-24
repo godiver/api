@@ -34,6 +34,8 @@ jobs:
         name: Build docker image
         run: |-
           docker build . -t ${{ secrets.GCR_PRD }}:latest
+      - name: Configure docker to use the gcloud cli
+        run: gcloud auth configure-docker --quiet
       - name: Push docker image
         run: |-
           docker push ${{ secrets.GCR_PRD }}:latest
