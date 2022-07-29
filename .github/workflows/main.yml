@@ -26,12 +26,12 @@ jobs:
           workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
           service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
           access_token_lifetime: 300s
-      # - name: Login GCP
-      #   run: |-
-      #     gcloud auth login --cred-file="${{ steps.auth.outputs.credentials_file_path }}"
+      - name: Login GCP
+        run: |-
+          gcloud auth login --brief --cred-file="${{ steps.auth.outputs.credentials_file_path }}"
       #     gcloud config set project godiver-books-video
-      - name: 'Set up Cloud SDK'
-        uses: 'google-github-actions/setup-gcloud@v0'
+      # - name: 'Set up Cloud SDK'
+      #   uses: 'google-github-actions/setup-gcloud@v0'
       - name: Configure docker to use the gcloud cli
         run: gcloud auth configure-docker --quiet
       - id: build
