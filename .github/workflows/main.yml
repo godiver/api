@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [master, feature/cd]
+    branches: [master, feature/cd2]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -26,16 +26,18 @@ jobs:
           workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
           service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
           access_token_lifetime: 300s
-      - name: Login GCP
-        run: |-
-          gcloud auth login --cred-file="${{ steps.auth.outputs.credentials_file_path }}"
-          gcloud config set project godiver-books-video
+      # - name: Login GCP
+      #   run: |-
+      #     gcloud auth login --cred-file="${{ steps.auth.outputs.credentials_file_path }}"
+      #     gcloud config set project godiver-books-video
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v0'
+      - name: Configure docker to use the gcloud cli
+        run: gcloud auth configure-docker --quiet
       - id: build
         name: Build docker image
         run: |-
           docker build . -t ${{ secrets.GCR_PRD }}:latest
-      - name: Configure docker to use the gcloud cli
-        run: gcloud auth configure-docker --quiet
       - name: Push docker image
         run: |-
           docker push ${{ secrets.GCR_PRD }}:latest
