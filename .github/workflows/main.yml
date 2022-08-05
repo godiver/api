@@ -35,6 +35,7 @@ jobs:
         run: |-
           gcloud auth login --brief --cred-file="${{ steps.auth.outputs.credentials_file_path }}"
           docker build . -t ${{ secrets.GCR_PRD }}:latest
+          gcloud auth configure-docker ${{ secrets.GCR_PRD }}
           docker push ${{ secrets.GCR_PRD }}:latest
 
       - name: Logout
