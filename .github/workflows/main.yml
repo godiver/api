@@ -26,18 +26,12 @@ jobs:
           workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
           service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
           access_token_lifetime: 300s
-      - name: Login GCP
+      - name: Push docker image
         run: |-
           gcloud auth login --cred-file="${{ steps.auth.outputs.credentials_file_path }}"
           gcloud config set project godiver-books-video
-      - id: build
-        name: Build docker image
-        run: |-
+          gcloud auth configure-docker --quiet
           docker build . -t ${{ secrets.GCR_PRD }}:latest
-      - name: Configure docker to use the gcloud cli
-        run: gcloud auth configure-docker --quiet
-      - name: Push docker image
-        run: |-
           docker push ${{ secrets.GCR_PRD }}:latest
       - name: Logout
         run: |-
