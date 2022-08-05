@@ -19,6 +19,7 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - uses: actions/checkout@v2
+
       - id: auth
         name: authentication
         uses: google-github-actions/auth@v0.4.0
@@ -26,21 +27,27 @@ jobs:
           workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
           service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
           access_token_lifetime: 300s
-      - name: Login GCP
-        run: |-
-          gcloud auth login --brief --cred-file="${{ steps.auth.outputs.credentials_file_path }}"
+
+      # - name: Login GCP
+      #   run: |-
+      #     gcloud auth login --brief --cred-file="${{ steps.auth.outputs.credentials_file_path }}"
       #     gcloud config set project godiver-books-video
+
       # - name: 'Set up Cloud SDK'
       #   uses: 'google-github-actions/setup-gcloud@v0'
+
       - name: Configure docker to use the gcloud cli
         run: gcloud auth configure-docker --quiet
+
       - id: build
         name: Build docker image
         run: |-
           docker build . -t ${{ secrets.GCR_PRD }}:latest
+
       - name: Push docker image
         run: |-
           docker push ${{ secrets.GCR_PRD }}:latest
+
       - name: Logout
         run: |-
           gcloud auth revoke --all
