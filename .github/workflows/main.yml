@@ -26,15 +26,9 @@ jobs:
         with:
           workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
           service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
-          # access_token_lifetime: 300s
 
       - name: 'Set up Cloud SDK'
         uses: 'google-github-actions/setup-gcloud@v0'
-
-      # - name: Login GCP
-      #   run: |-
-      #     gcloud auth login --brief --cred-file="${{ steps.auth.outputs.credentials_file_path }}"
-      #     gcloud config set project godiver-books-video
 
       - name: 'Use gcloud CLI'
         run: 'gcloud info'
@@ -50,7 +44,3 @@ jobs:
       - name: Push docker image
         run: |-
           docker push ${{ secrets.GCR_PRD }}:latest
-
-      - name: Logout
-        run: |-
-          gcloud auth revoke --all
