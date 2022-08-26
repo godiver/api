@@ -50,4 +50,4 @@ jobs:
         with:
           service: 'booktube-api'
           image: ${{ secrets.GCR_PRD }}:latest
-
+          region: 'asia-northeast1'
