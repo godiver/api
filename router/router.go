@@ -37,12 +37,12 @@ func Router() {
 	}
 
 	graphqlHandler := handler.NewDefaultServer(generated.NewExecutableSchema(generated.Config{Resolvers: &graph.Resolver{}}))
-	playgroundHandler := playground.Handler("GraphQL playground", "/query")
+	playgroundHandler := playground.Handler("GraphQL playground", "/graphql")
 	e.GET("/playground", func(c echo.Context) error {
 		playgroundHandler.ServeHTTP(c.Response(), c.Request())
 		return nil
 	})
-	e.POST("/query", func(c echo.Context) error {
+	e.POST("/graphql", func(c echo.Context) error {
 		graphqlHandler.ServeHTTP(c.Response(), c.Request())
 		return nil
 	})
