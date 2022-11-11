@@ -1,4 +1,4 @@
-FROM golang:1.15.7-alpine3.13 as build
+FROM golang:1.19.0-alpine3.16 as build
 
 ARG RAKUTEN_APP_ID=""
 ARG YOUTUBE_DEVELOPER_KEY=""
@@ -14,7 +14,7 @@ RUN apk update && \
     apk upgrade && \
     apk add --no-cache \
     git && \
-    go get github.com/pilu/fresh
+    go install github.com/pilu/fresh@latest
 
 COPY ./ .
 
